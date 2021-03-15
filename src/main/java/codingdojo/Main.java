@@ -1,15 +1,18 @@
 package codingdojo;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         NumberFormat n = NumberFormat.getCurrencyInstance(Locale.US);
         String basketFilename = args[0];
         if (basketFilename.equals("SampleInput1.json")) {
-
-            long totalPrice = 315;
+            Reader dataReader = new FileReader(basketFilename);
+            long totalPrice = HenrysGrocery.calculatePrice(dataReader);
             System.out.println(n.format(totalPrice / 100.0));
         }
          else {
