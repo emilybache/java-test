@@ -7,16 +7,16 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Main {
+
+    public static final NumberFormat FORMAT_AS_DOLLARS = NumberFormat.getCurrencyInstance(Locale.US);
+
     public static void main(String[] args) throws FileNotFoundException {
-        NumberFormat n = NumberFormat.getCurrencyInstance(Locale.US);
+        if (args.length < 1) {
+            System.out.println("Please provide one argument: the name of the json file containing basket contents and current date");
+        }
         String basketFilename = args[0];
-        if (basketFilename.equals("SampleInput1.json")) {
-            Reader dataReader = new FileReader(basketFilename);
-            long totalPrice = HenrysGrocery.calculatePrice(dataReader);
-            System.out.println(n.format(totalPrice / 100.0));
-        }
-         else {
-             System.out.println("Error: unable to read basket data");
-        }
+        Reader dataReader = new FileReader(basketFilename);
+        long totalPrice = HenrysGrocery.calculatePrice(dataReader);
+        System.out.println(FORMAT_AS_DOLLARS.format(totalPrice / 100.0));
     }
 }
