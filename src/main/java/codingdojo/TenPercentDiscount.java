@@ -21,7 +21,7 @@ public class TenPercentDiscount implements Discount {
         for (ItemQuantity item :
                 datedBasket.basket) {
             if (item.name.equals(this.name)) {
-                discount += 1;
+                discount += 1*item.quantity;
             }
         }
         return discount;
