@@ -57,4 +57,13 @@ public class HenrysGroceryTest {
         long price = new HenrysGrocery(stock, new ArrayList<Discount>()).calculatePrice(basket);
         assertEquals(65, price);
     }
+
+    @Test
+    void calculatePriceSeveralItemsNoDiscounts() throws IOException {
+        DatedBasket basket = new DatedBasket();
+        basket.basket.add(new ItemQuantity("apples", 1));
+        basket.basket.add(new ItemQuantity("milk", 5));
+        long price = new HenrysGrocery(stock, new ArrayList<Discount>()).calculatePrice(basket);
+        assertEquals(660, price);
+    }
 }
