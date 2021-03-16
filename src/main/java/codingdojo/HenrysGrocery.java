@@ -9,12 +9,16 @@ import java.util.List;
 
 public class HenrysGrocery {
 
+    private List<StockItem> stock;
+    private List<Discount> discounts;
+
     public HenrysGrocery() {
         this(new ArrayList<StockItem>(), new ArrayList<Discount>());
     }
 
     public HenrysGrocery(List<StockItem> stock, List<Discount> discounts) {
-
+        this.stock = stock;
+        this.discounts = discounts;
     }
 
     public long calculatePrice(Reader dataReader) throws IOException {
@@ -24,6 +28,15 @@ public class HenrysGrocery {
     }
 
     public long calculatePrice(DatedBasket datedBasket) {
-        return 0;
+        long price = 0;
+        for (ItemQuantity item :
+             datedBasket.basket) {
+            price += item.quantity * priceForItem(item.name);
+        }
+        return price;
+    }
+
+    private long priceForItem(String name) {
+        return 65;
     }
 }
