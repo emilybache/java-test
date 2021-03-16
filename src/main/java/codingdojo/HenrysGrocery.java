@@ -5,11 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HenrysGrocery {
 
-    private List<StockItem> stock;
+    private Map<String, Long> stockPrices;
     private List<Discount> discounts;
 
     public HenrysGrocery() {
@@ -17,7 +19,11 @@ public class HenrysGrocery {
     }
 
     public HenrysGrocery(List<StockItem> stock, List<Discount> discounts) {
-        this.stock = stock;
+        this.stockPrices = new HashMap<>();
+        for (StockItem item :
+                stock) {
+            this.stockPrices.put(item.getName(), item.getPrice());
+        }
         this.discounts = discounts;
     }
 
@@ -37,6 +43,6 @@ public class HenrysGrocery {
     }
 
     private long priceForItem(String name) {
-        return 65;
+        return stockPrices.get(name);
     }
 }
