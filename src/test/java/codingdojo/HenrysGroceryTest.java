@@ -26,7 +26,7 @@ public class HenrysGroceryTest {
                 "  ]," +
                 "  \"purchaseDate\": 0" +
                 "}";
-        long price = HenrysGrocery.calculatePrice(new StringReader(inputJson));
+        long price = new HenrysGrocery().calculatePrice(new StringReader(inputJson));
         assertEquals(315, price);
     }
 }

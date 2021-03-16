@@ -17,7 +17,7 @@ public class Main {
         }
         String basketFilename = args[0];
         Reader dataReader = new FileReader(basketFilename);
-        long totalPrice = HenrysGrocery.calculatePrice(dataReader);
+        long totalPrice = new HenrysGrocery().calculatePrice(dataReader);
         System.out.println(FORMAT_AS_DOLLARS.format(totalPrice / 100.0));
     }
 }
