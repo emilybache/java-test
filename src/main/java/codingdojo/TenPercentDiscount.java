@@ -2,18 +2,13 @@ package codingdojo;
 
 import java.time.LocalDate;
 
-public class TenPercentDiscount implements Discount {
+public class TenPercentDiscount extends Discount {
     private final String name;
-    private Stock stock;
-    private LocalDate beginsOn;
-    private LocalDate endsOn;
 
     public TenPercentDiscount(String name, Stock stock, LocalDate beginsOn, LocalDate endsOn) {
-        super();
+        super(stock, beginsOn, endsOn);
         this.name = name;
-        this.stock = stock;
-        this.beginsOn = beginsOn;
-        this.endsOn = endsOn;
+
     }
 
     @Override
@@ -33,9 +28,4 @@ public class TenPercentDiscount implements Discount {
         return discount;
     }
 
-    @Override
-    public void updateValidPeriod(LocalDate from, LocalDate to) {
-        this.beginsOn = from;
-        this.endsOn = to;
-    }
 }

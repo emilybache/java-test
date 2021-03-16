@@ -2,8 +2,21 @@ package codingdojo;
 
 import java.time.LocalDate;
 
-interface Discount {
-    long apply(DatedBasket datedBasket);
+abstract class Discount {
+    protected Stock stock;
+    protected LocalDate beginsOn;
+    protected LocalDate endsOn;
 
-    void updateValidPeriod(LocalDate from, LocalDate to);
+    public Discount(Stock stock, LocalDate from, LocalDate to) {
+        this.stock = stock;
+        beginsOn = from;
+        endsOn = to;
+    }
+
+    public abstract long apply(DatedBasket datedBasket);
+
+    public void updateValidPeriod(LocalDate from, LocalDate to) {
+        this.beginsOn = from;
+        this.endsOn = to;
+    }
 }
