@@ -15,7 +15,7 @@ public class HenrysGrocery {
     private List<Discount> discounts;
 
     public HenrysGrocery() {
-        this(new ArrayList<StockItem>(), new ArrayList<Discount>());
+        this(new ArrayList<>(), new ArrayList<>());
     }
 
     public HenrysGrocery(List<StockItem> stock, List<Discount> discounts) {
@@ -36,13 +36,15 @@ public class HenrysGrocery {
     public long calculatePrice(DatedBasket datedBasket) {
         long price = 0;
         for (ItemQuantity item :
-             datedBasket.basket) {
-            price += item.quantity * priceForItem(item.name);
+                datedBasket.basket) {
+            price += item.quantity * stockPrices.get(item.name);
         }
-        return price;
+        long discount = 0;
+        for (Discount d :
+                discounts) {
+            discount += d.applyToBasket(datedBasket);
+        }
+        return price - discount;
     }
 
-    private long priceForItem(String name) {
-        return stockPrices.get(name);
-    }
 }

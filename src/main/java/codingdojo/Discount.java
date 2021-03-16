@@ -1,4 +1,5 @@
 package codingdojo;
 
-public class Discount {
+interface Discount {
+    long applyToBasket(DatedBasket datedBasket);
 }

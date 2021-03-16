@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class HenrysGroceryTest {
 
     private ArrayList<StockItem> stock;
+    private ArrayList<Discount> discounts;
 
     @BeforeEach
     void setUp() {
@@ -23,6 +25,8 @@ public class HenrysGroceryTest {
         stock.add(new StockItem("bread", 80));
         stock.add(new StockItem("milk", 130));
         stock.add(new StockItem("apples", 10));
+
+        discounts = new ArrayList<>();
     }
 
     @Test
@@ -65,5 +69,16 @@ public class HenrysGroceryTest {
         basket.basket.add(new ItemQuantity("milk", 5));
         long price = new HenrysGrocery(stock, new ArrayList<Discount>()).calculatePrice(basket);
         assertEquals(660, price);
+    }
+
+    @Test
+    void calculatePriceTenPercentDiscount() throws IOException {
+        DatedBasket basket = new DatedBasket();
+        basket.basket.add(new ItemQuantity("apples", 1));
+        LocalDate today = LocalDate.now();
+        LocalDate nextMonth = today.plusMonths(1);
+        discounts.add(new TenPercentDiscount("apples", today.minusDays(1), nextMonth.withDayOfMonth(nextMonth.lengthOfMonth())));
+        long price = new HenrysGrocery(stock, discounts).calculatePrice(basket);
+        assertEquals(9, price);
     }
 }
