@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class HenrysGrocery {
 
-    private Map<String, Long> stockPrices;
+    private Stock stock;
     private List<Discount> discounts;
 
     public HenrysGrocery() {
@@ -19,11 +19,8 @@ public class HenrysGrocery {
     }
 
     public HenrysGrocery(List<StockItem> stock, List<Discount> discounts) {
-        this.stockPrices = new HashMap<>();
-        for (StockItem item :
-                stock) {
-            this.stockPrices.put(item.getName(), item.getPrice());
-        }
+
+        this.stock = new Stock(stock);
         this.discounts = discounts;
     }
 
@@ -37,7 +34,7 @@ public class HenrysGrocery {
         long price = 0;
         for (ItemQuantity item :
                 datedBasket.basket) {
-            price += item.quantity * stockPrices.get(item.name);
+            price += item.quantity * stock.priceFor(item.name);
         }
         long discount = 0;
         for (Discount d :
