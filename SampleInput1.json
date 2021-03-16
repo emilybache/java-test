@@ -1,7 +1,13 @@
 {
-  "basket": {
-    "soup": 3,
-    "bread": 2
-  },
-  "purchase_date": 0
+  "basket": [
+    {
+      "name": "soup",
+      "quantity": 3
+    },
+    {
+      "name": "bread",
+      "quantity": 2
+    }
+  ],
+  "purchaseDate": 0
 }
