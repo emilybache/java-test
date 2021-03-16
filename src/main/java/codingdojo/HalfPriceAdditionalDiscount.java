@@ -10,6 +10,9 @@ public class HalfPriceAdditionalDiscount extends Discount {
 
     @Override
     public long apply(DatedBasket datedBasket) {
+        if (!isBasketDateInValidPeriod(datedBasket.purchaseDate)) {
+            return 0;
+        }
         return 0;
     }
 }
