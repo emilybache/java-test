@@ -24,4 +24,12 @@ public class TenPercentDiscountTest {
         basket.basket.add(new ItemQuantity("apples", 5));
         assertEquals(5, d.apply(basket));
     }
+
+    /*@Test
+    public void discountIsTenPercent() {
+        Discount d = new TenPercentDiscount("milk", stockPrices, TODAY.minusDays(1), TODAY.plusDays(7));
+        DatedBasket basket = new DatedBasket();
+        basket.basket.add(new ItemQuantity("milk", 1));
+        assertEquals(13, d.apply(basket));
+    }*/
 }
