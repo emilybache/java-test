@@ -13,7 +13,7 @@ public class TenPercentDiscount extends Discount {
 
     @Override
     public long apply(DatedBasket datedBasket) {
-        if (!isBasketDateIsInValidPeriod(datedBasket.purchaseDate)) {
+        if (!isBasketDateInValidPeriod(datedBasket.purchaseDate)) {
             return 0;
         }
 

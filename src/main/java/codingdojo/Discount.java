@@ -21,7 +21,7 @@ abstract class Discount {
     }
 
 
-    protected boolean isBasketDateIsInValidPeriod(int basketPurchaseDate) {
+    protected boolean isBasketDateInValidPeriod(int basketPurchaseDate) {
         LocalDate basketDate = LocalDate.now().plusDays(basketPurchaseDate);
         return !basketDate.isBefore(beginsOn) && !basketDate.isAfter(endsOn);
     }
