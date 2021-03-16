@@ -17,6 +17,8 @@ public class HenrysGroceryTest {
 
     private ArrayList<StockItem> stock;
     private ArrayList<Discount> discounts;
+    public static final LocalDate TODAY = LocalDate.now();
+    public static final LocalDate NEXT_MONTH = TODAY.plusMonths(1);
 
     @BeforeEach
     void setUp() {
@@ -75,9 +77,7 @@ public class HenrysGroceryTest {
     void calculatePriceTenPercentDiscount() throws IOException {
         DatedBasket basket = new DatedBasket();
         basket.basket.add(new ItemQuantity("apples", 1));
-        LocalDate today = LocalDate.now();
-        LocalDate nextMonth = today.plusMonths(1);
-        discounts.add(new TenPercentDiscount("apples", today.minusDays(1), nextMonth.withDayOfMonth(nextMonth.lengthOfMonth())));
+        discounts.add(new TenPercentDiscount("apples", TODAY.minusDays(1), NEXT_MONTH.withDayOfMonth(NEXT_MONTH.lengthOfMonth())));
         long price = new HenrysGrocery(stock, discounts).calculatePrice(basket);
         assertEquals(9, price);
     }

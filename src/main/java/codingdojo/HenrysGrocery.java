@@ -42,7 +42,7 @@ public class HenrysGrocery {
         long discount = 0;
         for (Discount d :
                 discounts) {
-            discount += d.applyToBasket(datedBasket);
+            discount += d.apply(datedBasket);
         }
         return price - discount;
     }

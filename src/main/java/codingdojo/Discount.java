@@ -1,5 +1,5 @@
 package codingdojo;
 
 interface Discount {
-    long applyToBasket(DatedBasket datedBasket);
+    long apply(DatedBasket datedBasket);
 }
