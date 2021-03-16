@@ -1,7 +1,5 @@
 package codingdojo;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +7,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -77,7 +74,7 @@ public class HenrysGroceryTest {
     void calculatePriceTenPercentDiscount() throws IOException {
         DatedBasket basket = new DatedBasket();
         basket.basket.add(new ItemQuantity("apples", 1));
-        discounts.add(new TenPercentDiscount("apples", TODAY.minusDays(1), NEXT_MONTH.withDayOfMonth(NEXT_MONTH.lengthOfMonth())));
+        discounts.add(new TenPercentDiscount("apples", new Stock(stock), TODAY.minusDays(1), NEXT_MONTH.withDayOfMonth(NEXT_MONTH.lengthOfMonth())));
         long price = new HenrysGrocery(stock, discounts).calculatePrice(basket);
         assertEquals(9, price);
     }
