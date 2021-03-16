@@ -22,11 +22,7 @@ abstract class Discount {
 
 
     protected boolean isBasketDateIsInValidPeriod(int basketPurchaseDate) {
-        boolean basketDateIsInValidPeriod = true;
         LocalDate basketDate = LocalDate.now().plusDays(basketPurchaseDate);
-        if (basketDate.isBefore(beginsOn) || basketDate.isAfter(endsOn)) {
-            basketDateIsInValidPeriod = false;
-        }
-        return basketDateIsInValidPeriod;
+        return !basketDate.isBefore(beginsOn) && !basketDate.isAfter(endsOn);
     }
 }
