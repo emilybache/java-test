@@ -1,6 +1,7 @@
 package codingdojo;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class HalfPriceAdditionalDiscount extends Discount {
     private String mainItem;
@@ -19,12 +20,23 @@ public class HalfPriceAdditionalDiscount extends Discount {
             return 0;
         }
         long discount = 0;
-        for (ItemQuantity item :
-                datedBasket.basket) {
-            if (item.name.equals(this.mainItem) && item.quantity >= 2) {
-                discount += stock.priceFor(additionalItem)*0.5;
-            }
+        if (basketQuantity(datedBasket.basket, this.mainItem) >= 2
+                && basketQuantity(datedBasket.basket, additionalItem) >= 1) {
+
+            discount += stock.priceFor(additionalItem)*0.5;
         }
+
         return discount;
     }
+
+    private long basketQuantity(List<ItemQuantity> basket, String itemName) {
+        for (ItemQuantity item :
+                basket) {
+            if (item.name.equals(itemName)) {
+                return item.quantity;
+            }
+        }
+        return 0;
+    }
+
 }

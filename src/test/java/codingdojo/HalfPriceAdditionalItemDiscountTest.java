@@ -35,4 +35,11 @@ public class HalfPriceAdditionalItemDiscountTest {
         basket.basket.add(new ItemQuantity("bread", 1));
         assertEquals(40, d.apply(basket));
     }
+
+    @Test
+    public void shouldntCrashIfNoAdditionalItem() {
+        HalfPriceAdditionalDiscount d = new HalfPriceAdditionalDiscount(stock, TODAY.minusDays(1), TODAY.plusDays(7), "soup", "bread");
+        basket.basket.add(new ItemQuantity("soup", 2));
+        assertEquals(0, d.apply(basket));
+    }
 }
