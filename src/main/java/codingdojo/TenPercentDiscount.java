@@ -13,8 +13,7 @@ public class TenPercentDiscount extends Discount {
 
     @Override
     public long apply(DatedBasket datedBasket) {
-        LocalDate basketDate = LocalDate.now().plusDays(datedBasket.purchaseDate);
-        if (basketDate.isBefore(beginsOn) || basketDate.isAfter(endsOn)) {
+        if (!isBasketDateIsInValidPeriod(datedBasket.purchaseDate)) {
             return 0;
         }
 
