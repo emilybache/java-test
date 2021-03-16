@@ -24,17 +24,28 @@ public class TenPercentDiscountTest {
 
     @Test
     public void discountAppliesToAllItems() {
-        Stock stock = new Stock(List.of(new StockItem("apples", 10)));
-        Discount d = new TenPercentDiscount("apples", stock, TODAY.minusDays(1), TODAY.plusDays(7));
-        basket.basket.add(new ItemQuantity("apples", 5));
+        String itemName = "apples";
+        int priceInCents = 10;
+        int quantity = 5;
+        Discount d = createCurrentDiscountForItem(itemName, priceInCents, quantity);
         assertEquals(5, d.apply(basket));
     }
 
     @Test
     public void discountIsTenPercent() {
-        Stock stock = new Stock(List.of(new StockItem("milk", 130)));
-        Discount d = new TenPercentDiscount("milk", stock, TODAY.minusDays(1), TODAY.plusDays(7));
-        basket.basket.add(new ItemQuantity("milk", 1));
+        String itemName = "milk";
+        int priceInCents = 130;
+        int quantity = 1;
+        Discount d = createCurrentDiscountForItem(itemName, priceInCents, quantity);
         assertEquals(13, d.apply(basket));
     }
+
+    private Discount createCurrentDiscountForItem(String itemName, int priceInCents, int quantity) {
+        Stock stock = new Stock(List.of(new StockItem(itemName, priceInCents)));
+        Discount discount = new TenPercentDiscount(itemName, stock, TODAY.minusDays(1), TODAY.plusDays(7));
+        basket.basket.add(new ItemQuantity(itemName, quantity));
+        return discount;
+    }
+
+
 }
