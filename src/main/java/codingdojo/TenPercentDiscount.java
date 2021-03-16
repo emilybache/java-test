@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class TenPercentDiscount implements Discount {
     private final String name;
     private Stock stock;
-    private final LocalDate beginsOn;
-    private final LocalDate endsOn;
+    private LocalDate beginsOn;
+    private LocalDate endsOn;
 
     public TenPercentDiscount(String name, Stock stock, LocalDate beginsOn, LocalDate endsOn) {
         super();
@@ -18,6 +18,10 @@ public class TenPercentDiscount implements Discount {
 
     @Override
     public long apply(DatedBasket datedBasket) {
+        LocalDate basketDate = LocalDate.now().plusDays(datedBasket.purchaseDate);
+        if (basketDate.isBefore(beginsOn) || basketDate.isAfter(endsOn)) {
+            return 0;
+        }
 
         long discount = 0;
         for (ItemQuantity item :
@@ -27,5 +31,11 @@ public class TenPercentDiscount implements Discount {
             }
         }
         return discount;
+    }
+
+    @Override
+    public void updateValidPeriod(LocalDate from, LocalDate to) {
+        this.beginsOn = from;
+        this.endsOn = to;
     }
 }

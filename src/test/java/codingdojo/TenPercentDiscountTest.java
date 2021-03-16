@@ -1,6 +1,5 @@
 package codingdojo;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -40,12 +39,20 @@ public class TenPercentDiscountTest {
         assertEquals(13, d.apply(basket));
     }
 
-    private Discount createCurrentDiscountForItem(String itemName, int priceInCents, int quantity) {
+    private TenPercentDiscount createCurrentDiscountForItem(String itemName, int priceInCents, int quantity) {
         Stock stock = new Stock(List.of(new StockItem(itemName, priceInCents)));
-        Discount discount = new TenPercentDiscount(itemName, stock, TODAY.minusDays(1), TODAY.plusDays(7));
+        TenPercentDiscount discount = new TenPercentDiscount(itemName, stock, TODAY.minusDays(1), TODAY.plusDays(7));
         basket.basket.add(new ItemQuantity(itemName, quantity));
         return discount;
     }
 
-
+    @Test
+    public void discountDoesntApplyOutsideDateRange() {
+        String itemName = "milk";
+        int priceInCents = 130;
+        int quantity = 1;
+        TenPercentDiscount d = createCurrentDiscountForItem(itemName, priceInCents, quantity);
+        d.updateValidPeriod(TODAY.plusDays(3), TODAY.plusDays(7));
+        assertEquals(0, d.apply(basket));
+    }
 }
