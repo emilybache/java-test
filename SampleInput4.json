@@ -1,0 +1,17 @@
+{
+  "basket": [
+    {
+      "name": "apples",
+      "quantity": 3
+    },
+    {
+      "name": "soup",
+      "quantity": 2
+    },
+    {
+      "name": "bread",
+      "quantity": 1
+    }
+  ],
+  "purchaseDate": 5
+}
