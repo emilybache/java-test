@@ -19,12 +19,10 @@ public class HalfPriceAdditionalItemDiscount extends Discount {
         if (!isBasketDateInValidPeriod(datedBasket.purchaseDate)) {
             return 0;
         }
-        long discount = 0;
         long numberOfTimesPossibleToApplyDiscount = basketQuantity(datedBasket.basket, this.mainItem) / 2;
         long actualNumberOfTimesToApplyDiscount = Math.min(numberOfTimesPossibleToApplyDiscount, basketQuantity(datedBasket.basket, additionalItem));
-        discount = Math.round(stock.priceFor(additionalItem)*0.5*actualNumberOfTimesToApplyDiscount);
 
-        return discount;
+        return Math.round(stock.priceFor(additionalItem)*0.5*actualNumberOfTimesToApplyDiscount);
     }
 
     private long basketQuantity(List<ItemQuantity> basket, String itemName) {
