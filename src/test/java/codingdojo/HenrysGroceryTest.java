@@ -26,6 +26,7 @@ public class HenrysGroceryTest {
         stock.add(new StockItem("apples", 10));
 
         discounts = new ArrayList<>();
+
     }
 
     @Test
@@ -43,7 +44,9 @@ public class HenrysGroceryTest {
                 "  ]," +
                 "  \"purchaseDate\": 0" +
                 "}";
-        long price = new HenrysGrocery().calculatePrice(new StringReader(inputJson));
+        discounts.add(new TenPercentDiscount("apples", new Stock(stock), TODAY.plusDays(3), NEXT_MONTH.withDayOfMonth(NEXT_MONTH.lengthOfMonth())));
+        discounts.add(new HalfPriceAdditionalItemDiscount(new Stock(stock), TODAY.minusDays(1), TODAY.plusDays(7), "soup", "bread"));
+        long price = new HenrysGrocery(stock, discounts).calculatePrice(new StringReader(inputJson));
         assertEquals(315, price);
     }
 

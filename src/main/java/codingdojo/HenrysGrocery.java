@@ -27,7 +27,7 @@ public class HenrysGrocery {
     public long calculatePrice(Reader dataReader) throws IOException {
         DatedBasket basket = new ObjectMapper().readValue(dataReader, DatedBasket.class);
 
-        return 315;
+        return calculatePrice(basket);
     }
 
     public long calculatePrice(DatedBasket datedBasket) {
