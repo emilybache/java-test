@@ -9,3 +9,5 @@ You can run this by hand like this:
     java codingdojo.Main SampleInput1.json
 
 Verify the output is $3.15
+
+You can test the other sample input files in the same way and check you get the results listed in the README.
