@@ -31,16 +31,14 @@ public class HenrysGrocery {
     }
 
     public long calculatePrice(DatedBasket datedBasket) {
-        long price = 0;
-        for (ItemQuantity item :
-                datedBasket.basket) {
-            price += item.quantity * stock.priceFor(item.name);
-        }
-        long discount = 0;
-        for (Discount d :
-                discounts) {
-            discount += d.apply(datedBasket);
-        }
+        long price = datedBasket.basket
+                .stream()
+                .mapToLong(item -> item.quantity * stock.priceFor(item.name))
+                .sum();
+        long discount = discounts
+                .stream()
+                .mapToLong(d -> d.apply(datedBasket))
+                .sum();
         return price - discount;
     }
 

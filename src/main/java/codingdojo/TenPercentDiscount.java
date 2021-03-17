@@ -17,14 +17,11 @@ public class TenPercentDiscount extends Discount {
             return 0;
         }
 
-        long discount = 0;
-        for (ItemQuantity item :
-                datedBasket.basket) {
-            if (item.name.equals(this.name)) {
-                discount += stock.priceFor(name)*0.1*item.quantity;
-            }
-        }
-        return discount;
+        return datedBasket.basket
+                .stream()
+                .filter(item -> item.name.equals(this.name))
+                .mapToLong(item -> (long) (stock.priceFor(name) * 0.1 * item.quantity))
+                .sum();
     }
 
 }

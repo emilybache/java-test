@@ -26,13 +26,12 @@ public class HalfPriceAdditionalItemDiscount extends Discount {
     }
 
     private long basketQuantity(List<ItemQuantity> basket, String itemName) {
-        for (ItemQuantity item :
-                basket) {
-            if (item.name.equals(itemName)) {
-                return item.quantity;
-            }
-        }
-        return 0;
+        return basket
+                .stream()
+                .filter(item -> item.name.equals(itemName))
+                .findFirst()
+                .map(item -> item.quantity)
+                .orElse(0L);
     }
 
 }

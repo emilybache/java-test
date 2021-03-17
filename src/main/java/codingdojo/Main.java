@@ -1,9 +1,7 @@
 package codingdojo;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,6 +15,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         if (args.length < 1) {
             System.out.println("Please provide one argument: the name of the json file containing basket contents and current date");
+            System.exit(-1);
         }
         String basketFilename = args[0];
 
